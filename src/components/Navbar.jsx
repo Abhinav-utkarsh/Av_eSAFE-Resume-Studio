@@ -15,7 +15,7 @@ export default function Navbar({ onClear, onDownload, selectedTemplate, setSelec
     <>
       <nav className="flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 py-3 bg-white/60 backdrop-blur-2xl backdrop-saturate-150 border-b border-white/40 sticky top-0 z-50 shadow-[0_4px_30px_rgba(0,0,0,0.05)] print:hidden gap-3 transition-all text-gray-800">
       <div className="flex items-center gap-3 sm:gap-4 cursor-pointer group w-full lg:w-auto justify-center lg:justify-start" onClick={() => setCurrentView('templates')}>
-        <img src="/Images/logo.png" alt="Av_eSAFE Resume Studio" className="h-14 sm:h-16 w-auto object-contain group-hover:scale-105 transition-transform" />
+        <img src="/logo.png" alt="Av_eSAFE Resume Studio" className="h-14 sm:h-16 w-auto object-contain group-hover:scale-105 transition-transform" />
       </div>
 
       <div className="flex flex-wrap items-center gap-2 sm:gap-4 w-full lg:w-auto justify-center lg:justify-end">
