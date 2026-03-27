@@ -73,6 +73,49 @@ export default function Template19({ resumeData }) {
             </div>
           </div>
         )}
+
+        {projects?.length > 0 && projects.some(p => p.title) && (
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tight text-gray-900 mb-6" style={{ color: safeColor }}>Projects</h2>
+            <div className="space-y-6">
+              {projects.map((proj) => proj.title && (
+                <div key={proj.id}>
+                  <h3 className="font-bold text-lg text-gray-900">{proj.title} {proj.link && <span className="font-normal text-sm ml-2 text-blue-500 break-all">({proj.link})</span>}</h3>
+                  <p className="text-sm text-gray-700 leading-relaxed mt-2">{proj.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {certifications?.length > 0 && certifications.some(c => c.name) && (
+          <div>
+            <h2 className="text-2xl font-black uppercase tracking-tight text-gray-900 mb-6" style={{ color: safeColor }}>Certifications</h2>
+            <div className="space-y-4">
+              {certifications.map((cert) => cert.name && (
+                <div key={cert.id}>
+                  <h3 className="font-bold text-base text-gray-900">{cert.name}</h3>
+                  <p className="text-sm text-gray-600 mt-1">{cert.issuer} | <span className="font-bold">{cert.date}</span></p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {customSections?.length > 0 && customSections.map((section) => (
+          <div key={section.id}>
+            <h2 className="text-2xl font-black uppercase tracking-tight text-gray-900 mb-6" style={{ color: safeColor }}>{section.title}</h2>
+            <div className="space-y-6">
+              {section.items.map((item) => (
+                <div key={item.id}>
+                  <h3 className="font-bold text-lg text-gray-900">{item.title}</h3>
+                  <div className="text-sm font-bold text-gray-500 uppercase tracking-wide my-1">{item.subtitle} {item.subtitle && item.date && <span className="mx-2">|</span>} {item.date}</div>
+                  <p className="text-sm text-gray-700 leading-relaxed mt-2">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -51,6 +51,23 @@ export default function Template17({ resumeData }) {
         </div>
       )}
 
+      {education?.length > 0 && education.some(e => e.degree) && (
+        <div className="mb-8">
+          <h2 className="text-lg font-bold text-white mb-4"># EDUCATION</h2>
+          <div className="space-y-4 border-l-2 border-slate-700 pl-4">
+            {education.map((edu) => edu.degree && (
+              <div key={edu.id}>
+                <div className="flex flex-wrap justify-between items-baseline mb-1">
+                  <h3 className="font-bold text-white text-base">{edu.degree}</h3>
+                  <span className="text-sm">{edu.year}</span>
+                </div>
+                <p className="text-sm mt-1">{edu.college}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {projects?.length > 0 && projects.some(p => p.title) && (
         <div className="mb-8">
           <h2 className="text-lg font-bold text-white mb-4"># PROJECTS</h2>
@@ -59,6 +76,23 @@ export default function Template17({ resumeData }) {
               <div key={proj.id}>
                 <h3 className="font-bold text-white text-base">{proj.title} {proj.link && <span className="font-normal text-sm" style={{color: safeColor}}>({proj.link})</span>}</h3>
                 <p className="text-sm mt-2">{proj.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {certifications?.length > 0 && certifications.some(c => c.name) && (
+        <div className="mb-8">
+          <h2 className="text-lg font-bold text-white mb-4"># CERTIFICATIONS</h2>
+          <div className="space-y-4 border-l-2 border-slate-700 pl-4">
+            {certifications.map((cert) => cert.name && (
+              <div key={cert.id}>
+                <div className="flex flex-wrap justify-between items-baseline mb-1">
+                  <h3 className="font-bold text-white text-base">{cert.name}</h3>
+                  <span className="text-sm">{cert.date}</span>
+                </div>
+                <p className="text-sm mt-1">{cert.issuer}</p>
               </div>
             ))}
           </div>

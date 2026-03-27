@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Template13({ resumeData }) {
-  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, themeColor } = resumeData;
+  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, customSections, themeColor } = resumeData;
   const skillsList = skills ? skills.split(',').map(s => s.trim()).filter(Boolean) : [];
   const safeColor = themeColor || '#1f2937';
 
@@ -90,6 +90,24 @@ export default function Template13({ resumeData }) {
           <p className="text-sm text-gray-800 ml-4 leading-relaxed break-words">{skillsList.join(' • ')}</p>
         </div>
       )}
+
+      {customSections?.length > 0 && customSections.map((section) => (
+        <div key={section.id} className="mb-8">
+          <h2 className="text-sm font-bold uppercase tracking-[0.15em] mb-3 text-gray-500">{section.title}</h2>
+          <div className="space-y-6">
+            {section.items.map((item) => (
+              <div key={item.id} className="ml-4 border-l-2 pl-4" style={{ borderColor: `${safeColor}40` }}>
+                <div className="flex flex-wrap justify-between items-baseline gap-2">
+                  <h3 className="font-bold text-base text-gray-900 break-words">{item.title}</h3>
+                  <span className="text-sm font-semibold text-gray-700 whitespace-nowrap">{item.date}</span>
+                </div>
+                {item.subtitle && <p className="text-sm italic text-gray-600 mb-2 break-words">{item.subtitle}</p>}
+                <p className="text-sm text-gray-800">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }

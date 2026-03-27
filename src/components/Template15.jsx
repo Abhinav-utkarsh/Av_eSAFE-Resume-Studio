@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Template15({ resumeData }) {
-  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, themeColor } = resumeData;
+  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, customSections, themeColor } = resumeData;
   const skillsList = skills ? skills.split(',').map(s => s.trim()).filter(Boolean) : [];
   const safeColor = themeColor || '#475569'; // Slate 600
 
@@ -93,6 +93,24 @@ export default function Template15({ resumeData }) {
             </div>
           </div>
         )}
+
+        {customSections?.length > 0 && customSections.map((section) => (
+          <div key={section.id} className="mb-3">
+            <h2 className="text-[14px] font-bold uppercase mb-2 border-b-[1.5px] pb-0.5 text-gray-800" style={{ borderColor: `${safeColor}50` }}>{section.title}</h2>
+            <div className="space-y-3">
+              {section.items.map((item) => (
+                <div key={item.id}>
+                  <div className="flex flex-wrap justify-between items-baseline">
+                    <h3 className="font-bold text-[14px] text-gray-900 break-words">{item.title}</h3>
+                    <span className="font-bold whitespace-nowrap text-gray-600">{item.date}</span>
+                  </div>
+                  {item.subtitle && <div className="italic font-semibold text-gray-700 mb-1 break-words">{item.subtitle}</div>}
+                  <p className="text-gray-700 pl-4 list-disc" style={{ display: 'list-item' }}>{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

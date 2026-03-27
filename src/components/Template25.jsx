@@ -54,6 +54,53 @@ export default function Template25({ resumeData }) {
         </div>
       )}
 
+      {projects?.length > 0 && projects.some(p => p.title) && (
+        <div className="mb-6">
+          <h2 className="text-lg font-bold uppercase border-b border-black mb-3">Projects</h2>
+          <div className="space-y-4">
+            {projects.map((proj) => proj.title && (
+              <div key={proj.id}>
+                <div className="flex justify-between items-end mb-1">
+                  <h3 className="font-bold text-base">{proj.title} {proj.link && <span className="font-normal italic text-sm ml-1 text-gray-600 break-all">({proj.link})</span>}</h3>
+                </div>
+                <p className="text-sm leading-relaxed">{proj.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {certifications?.length > 0 && certifications.some(c => c.name) && (
+        <div className="mb-6">
+          <h2 className="text-lg font-bold uppercase border-b border-black mb-3">Certifications</h2>
+          <div className="space-y-3">
+            {certifications.map((cert) => cert.name && (
+              <div key={cert.id} className="flex justify-between items-end">
+                <div className="font-bold text-base">{cert.name}, <span className="font-normal italic">{cert.issuer}</span></div>
+                <span className="text-sm">{cert.date}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {customSections?.length > 0 && customSections.map((section) => (
+        <div key={section.id} className="mb-6">
+          <h2 className="text-lg font-bold uppercase border-b border-black mb-3">{section.title}</h2>
+          <div className="space-y-4">
+            {section.items.map((item) => (
+              <div key={item.id}>
+                <div className="flex justify-between items-end mb-1">
+                  <h3 className="font-bold text-base">{item.title} {item.subtitle && <span className="font-normal italic ml-1">({item.subtitle})</span>}</h3>
+                  <span className="text-sm">{item.date}</span>
+                </div>
+                <p className="text-sm leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
       {skillsList.length > 0 && (
         <div className="mb-6">
           <h2 className="text-lg font-bold uppercase border-b border-black mb-3">Technical Skills</h2>

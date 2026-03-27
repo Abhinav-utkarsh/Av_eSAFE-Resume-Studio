@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Template2({ resumeData }) {
-  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, themeColor } = resumeData;
+  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, customSections, themeColor } = resumeData;
   const skillsList = skills ? skills.split(',').map(s => s.trim()).filter(Boolean) : [];
   const safeColor = themeColor || '#1e40af';
 
@@ -130,6 +130,29 @@ export default function Template2({ resumeData }) {
             </div>
           </div>
         )}
+
+        {customSections?.length > 0 && customSections.map((section) => (
+          <div key={section.id}>
+            <h2 className="text-xl font-extrabold mb-5 flex items-center gap-3" style={{ color: safeColor }}>
+              <span className="w-6 h-1 rounded-full" style={{ backgroundColor: safeColor }}></span>
+              {section.title}
+            </h2>
+            <div className="space-y-6">
+              {section.items.map((item) => (
+                <div key={item.id} className="relative pl-6 border-l-2 border-gray-200">
+                  <div className="absolute w-3 h-3 rounded-full -left-[7px] top-1.5 border-2 border-white" style={{ backgroundColor: safeColor }}></div>
+                  <h3 className="font-bold text-base text-gray-900 break-words">{item.title}</h3>
+                  {item.subtitle || item.date ? (
+                    <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2 mt-0.5 break-words">
+                      {item.subtitle} {item.subtitle && item.date ? '&bull;' : ''} {item.date}
+                    </div>
+                  ) : null}
+                  <p className="text-sm text-gray-700 leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

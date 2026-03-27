@@ -39,38 +39,6 @@ export default function Form({ resumeData, setResumeData }) {
     }
   };
 
-  // Import / Export JSON
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    if (file.name.endsWith('.json')) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        try {
-          const json = JSON.parse(event.target.result);
-          setResumeData(prev => ({ ...prev, ...json }));
-        } catch (err) {
-          alert("Invalid JSON format.");
-        }
-      };
-      reader.readAsText(file);
-    } else {
-      alert("Deep PDF/DOCX parsing requires a backend AI integration. Please upload a previously exported JSON resume file.");
-    }
-  };
-
-  const handleExportJSON = () => {
-    const dataStr = JSON.stringify(resumeData, null, 2);
-    const blob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${resumeData.name || "Resume"}_Data.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  };
-
   // Custom Section Handlers
   const addCustomSection = () => {
     setResumeData(prev => ({ ...prev, customSections: [...(prev.customSections || []), { id: Math.random().toString(36).substr(2, 9), title: 'New Custom Section', items: [] }] }));
@@ -92,15 +60,6 @@ export default function Form({ resumeData, setResumeData }) {
         <h2 className="text-2xl sm:text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-500">
           Build Your Legend
         </h2>
-        <div className="flex flex-wrap gap-2 w-full sm:w-auto">
-          <label className="cursor-pointer flex-1 sm:flex-none text-center px-4 py-2 bg-white text-slate-700 rounded-xl text-sm font-semibold hover:bg-slate-50 transition-all border border-slate-200 shadow-sm">
-            Import Data
-            <input type="file" accept=".json,.pdf,.docx" className="hidden" onChange={handleFileUpload} />
-          </label>
-          <button type="button" onClick={handleExportJSON} className="flex-1 sm:flex-none px-4 py-2 bg-indigo-50 text-indigo-700 rounded-xl text-sm font-semibold hover:bg-indigo-100 transition-all border border-indigo-100 shadow-sm">
-            Export Data
-          </button>
-        </div>
       </div>
       
       <form className="space-y-8">

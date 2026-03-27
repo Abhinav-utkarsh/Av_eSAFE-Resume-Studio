@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Template10({ resumeData }) {
-  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, themeColor } = resumeData;
+  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, customSections, themeColor } = resumeData;
   const skillsList = skills ? skills.split(',').map(s => s.trim()).filter(Boolean) : [];
 
   return (
@@ -91,6 +91,24 @@ export default function Template10({ resumeData }) {
               <p className="text-lg font-black leading-loose text-black uppercase tracking-wider">{skillsList.join('   /   ')}</p>
             </div>
           )}
+          
+          {customSections?.length > 0 && customSections.map((section) => (
+            <div key={section.id} className="col-span-2">
+              <h2 className="text-4xl font-black uppercase mb-8 border-b-4 border-black pb-2 flex justify-between items-end">{section.title} <span className="w-12 h-4 block mb-2" style={{ backgroundColor: themeColor || '#facc15' }}></span></h2>
+              <div className="space-y-8">
+                {section.items.map((item) => (
+                  <div key={item.id} className="bg-white p-8 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:translate-x-1 hover:translate-y-1 hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all">
+                    <div className="flex flex-wrap gap-4 justify-between items-start mb-4 border-b-2 border-dashed border-gray-300 pb-4">
+                      <h3 className="text-2xl font-black uppercase text-black break-words flex-1 min-w-[200px]">{item.title}</h3>
+                      {item.date && <span className="text-sm font-black px-4 py-1 border-2 border-black uppercase whitespace-nowrap" style={{ backgroundColor: themeColor || '#facc15' }}>{item.date}</span>}
+                    </div>
+                    {item.subtitle && <p className="text-lg font-bold text-gray-600 mb-4 break-words">{item.subtitle}</p>}
+                    <p className="text-base font-medium text-gray-800">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

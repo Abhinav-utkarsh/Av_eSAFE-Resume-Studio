@@ -55,6 +55,52 @@ export default function Template24({ resumeData }) {
           </div>
         )}
         
+        {projects?.length > 0 && projects.some(p => p.title) && (
+          <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+            <h2 className="text-xl font-black uppercase text-center mb-8" style={{ color: safeColor }}>Projects</h2>
+            <div className="space-y-8">
+              {projects.map((proj) => proj.title && (
+                <div key={proj.id} className="text-center">
+                  <h3 className="font-bold text-lg text-gray-900">{proj.title} {proj.link && <span className="text-sm font-normal text-blue-500 break-all">({proj.link})</span>}</h3>
+                  <p className="text-sm text-gray-600 leading-relaxed mt-3 max-w-2xl mx-auto">{proj.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {certifications?.length > 0 && certifications.some(c => c.name) && (
+          <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+            <h2 className="text-xl font-black uppercase text-center mb-8" style={{ color: safeColor }}>Certifications</h2>
+            <div className="grid grid-cols-2 gap-6 text-center">
+              {certifications.map((cert) => cert.name && (
+                <div key={cert.id}>
+                  <h3 className="font-bold text-gray-900">{cert.name}</h3>
+                  <p className="text-sm text-gray-600 my-1">{cert.issuer}</p>
+                  <p className="text-xs font-bold text-gray-400">{cert.date}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {customSections?.length > 0 && customSections.map((section) => (
+          <div key={section.id} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+            <h2 className="text-xl font-black uppercase text-center mb-8" style={{ color: safeColor }}>{section.title}</h2>
+            <div className="space-y-8">
+              {section.items.map((item) => (
+                <div key={item.id} className="text-center">
+                  <h3 className="font-bold text-lg text-gray-900">{item.title}</h3>
+                  {item.subtitle || item.date ? (
+                    <div className="text-sm font-bold text-gray-500 my-1">{item.subtitle} {item.subtitle && item.date ? '|' : ''} {item.date}</div>
+                  ) : null}
+                  <p className="text-sm text-gray-600 leading-relaxed mt-3 max-w-2xl mx-auto">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
         {skillsList.length > 0 && (
           <div className="text-center">
             <p className="text-sm font-bold tracking-widest leading-loose" style={{ color: safeColor }}>{skillsList.join('   /   ')}</p>

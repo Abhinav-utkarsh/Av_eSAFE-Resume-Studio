@@ -42,6 +42,36 @@ export default function Template20({ resumeData }) {
               </div>
             </div>
           )}
+
+          {projects?.length > 0 && projects.some(p => p.title) && (
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+              <h2 className="text-lg font-black uppercase mb-4" style={{ color: safeColor }}>Projects</h2>
+              <div className="space-y-5">
+                {projects.map((proj) => proj.title && (
+                  <div key={proj.id}>
+                    <h3 className="font-bold text-gray-900">{proj.title}</h3>
+                    {proj.link && <div className="text-xs font-bold text-blue-500 mb-2 break-all">{proj.link}</div>}
+                    <p className="text-sm text-gray-700">{proj.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {customSections?.length > 0 && customSections.map((section) => (
+            <div key={section.id} className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+              <h2 className="text-lg font-black uppercase mb-4" style={{ color: safeColor }}>{section.title}</h2>
+              <div className="space-y-5">
+                {section.items.map((item) => (
+                  <div key={item.id}>
+                    <h3 className="font-bold text-gray-900">{item.title}</h3>
+                    <div className="text-xs font-bold text-gray-500 mb-2">{item.subtitle} {item.subtitle && item.date && '•'} {item.date}</div>
+                    <p className="text-sm text-gray-700">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
         <div className="space-y-6">
@@ -65,6 +95,21 @@ export default function Template20({ resumeData }) {
                     <h3 className="font-bold text-gray-900">{edu.degree}</h3>
                     <div className="text-xs font-bold text-gray-500 mb-1">{edu.college}</div>
                     <div className="text-xs font-bold" style={{ color: safeColor }}>{edu.year}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {certifications?.length > 0 && certifications.some(c => c.name) && (
+            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+              <h2 className="text-lg font-black uppercase mb-4" style={{ color: safeColor }}>Certifications</h2>
+              <div className="space-y-4">
+                {certifications.map((cert) => cert.name && (
+                  <div key={cert.id}>
+                    <h3 className="font-bold text-gray-900">{cert.name}</h3>
+                    <div className="text-xs font-bold text-gray-500 mb-1">{cert.issuer}</div>
+                    <div className="text-xs font-bold" style={{ color: safeColor }}>{cert.date}</div>
                   </div>
                 ))}
               </div>

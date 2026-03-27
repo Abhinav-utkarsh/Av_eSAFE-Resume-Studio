@@ -42,6 +42,23 @@ export default function Template16({ resumeData }) {
           </div>
         )}
 
+        {projects?.length > 0 && projects.some(p => p.title) && (
+          <div className="relative border-l-2 pl-6 ml-3" style={{ borderColor: `${safeColor}50` }}>
+            <h2 className="text-2xl font-black uppercase tracking-widest mb-6 bg-white absolute -top-4 -left-3 px-2 text-gray-900">Projects</h2>
+            <div className="mt-8 space-y-6">
+              {projects.map((proj) => proj.title && (
+                <div key={proj.id} className="relative">
+                  <div className="absolute w-3 h-3 rounded-full -left-[31px] top-1.5" style={{ backgroundColor: safeColor }}></div>
+                  <div className="flex flex-wrap justify-between items-baseline mb-1">
+                    <h3 className="font-bold text-lg text-gray-900">{proj.title} {proj.link && <span className="font-normal text-sm ml-2 break-all text-blue-600">({proj.link})</span>}</h3>
+                  </div>
+                  <p className="text-sm leading-relaxed text-gray-700">{proj.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="grid grid-cols-2 gap-8">
           {education?.length > 0 && education.some(e => e.degree) && (
             <div className="relative border-l-2 pl-6 ml-3" style={{ borderColor: `${safeColor}50` }}>
@@ -86,6 +103,25 @@ export default function Template16({ resumeData }) {
             </div>
           </div>
         )}
+
+        {customSections?.length > 0 && customSections.map((section) => (
+          <div key={section.id} className="relative border-l-2 pl-6 ml-3" style={{ borderColor: `${safeColor}50` }}>
+            <h2 className="text-2xl font-black uppercase tracking-widest mb-6 bg-white absolute -top-4 -left-3 px-2 text-gray-900">{section.title}</h2>
+            <div className="mt-8 space-y-6">
+              {section.items.map((item) => (
+                <div key={item.id} className="relative">
+                  <div className="absolute w-3 h-3 rounded-full -left-[31px] top-1.5" style={{ backgroundColor: safeColor }}></div>
+                  <div className="flex flex-wrap justify-between items-baseline mb-1">
+                    <h3 className="font-bold text-lg text-gray-900">{item.title}</h3>
+                    <span className="text-sm font-bold whitespace-nowrap" style={{ color: safeColor }}>{item.date}</span>
+                  </div>
+                  {item.subtitle && <div className="text-sm font-semibold text-gray-600 mb-2">{item.subtitle}</div>}
+                  <p className="text-sm leading-relaxed text-gray-700">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -46,6 +46,20 @@ export default function Template21({ resumeData }) {
               </div>
             </div>
           )}
+          {certifications?.length > 0 && certifications.some(c => c.name) && (
+            <div>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Certifications</h2>
+              <div className="space-y-4">
+                {certifications.map((cert) => cert.name && (
+                  <div key={cert.id}>
+                    <h3 className="font-bold text-sm text-gray-900">{cert.name}</h3>
+                    <p className="text-xs text-gray-500 mt-1">{cert.issuer}</p>
+                    <p className="text-xs font-bold mt-1" style={{ color: safeColor }}>{cert.date}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="col-span-3 space-y-10 border-l border-gray-100 pl-8">
@@ -73,6 +87,40 @@ export default function Template21({ resumeData }) {
               </div>
             </div>
           )}
+
+          {projects?.length > 0 && projects.some(p => p.title) && (
+            <div>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6">Projects</h2>
+              <div className="space-y-8">
+                {projects.map((proj) => proj.title && (
+                  <div key={proj.id}>
+                    <div className="flex justify-between items-baseline mb-1">
+                      <h3 className="font-bold text-lg text-gray-900">{proj.title} {proj.link && <span className="font-normal text-sm ml-2 text-blue-500 break-all">({proj.link})</span>}</h3>
+                    </div>
+                    <p className="text-sm leading-relaxed text-gray-700">{proj.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {customSections?.length > 0 && customSections.map((section) => (
+            <div key={section.id}>
+              <h2 className="text-sm font-bold uppercase tracking-widest text-gray-400 mb-6">{section.title}</h2>
+              <div className="space-y-8">
+                {section.items.map((item) => (
+                  <div key={item.id}>
+                    <div className="flex justify-between items-baseline mb-1">
+                      <h3 className="font-bold text-lg text-gray-900">{item.title}</h3>
+                      <span className="text-sm font-bold" style={{ color: safeColor }}>{item.date}</span>
+                    </div>
+                    {item.subtitle && <p className="text-sm font-semibold text-gray-600 mb-3">{item.subtitle}</p>}
+                    <p className="text-sm leading-relaxed text-gray-700">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

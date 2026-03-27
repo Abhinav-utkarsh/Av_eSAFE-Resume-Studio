@@ -68,6 +68,35 @@ export default function Template18({ resumeData }) {
           </div>
         )}
 
+        {certifications?.length > 0 && certifications.some(c => c.name) && (
+          <div>
+            <h2 className="text-center text-lg font-bold tracking-widest uppercase mb-6" style={{ color: safeColor }}>Certifications</h2>
+            <div className="space-y-4 text-center">
+              {certifications.map((cert) => cert.name && (
+                <div key={cert.id}>
+                  <h3 className="font-bold text-gray-900 text-base">{cert.name}</h3>
+                  <p className="text-sm text-gray-600">{cert.issuer} | <span className="font-bold">{cert.date}</span></p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {customSections?.length > 0 && customSections.map((section) => (
+          <div key={section.id}>
+            <h2 className="text-center text-lg font-bold tracking-widest uppercase mb-6" style={{ color: safeColor }}>{section.title}</h2>
+            <div className="space-y-6 text-center max-w-3xl mx-auto">
+              {section.items.map((item) => (
+                <div key={item.id}>
+                  <h3 className="font-bold text-gray-900 text-base">{item.title}</h3>
+                  <div className="text-sm font-semibold uppercase tracking-wider my-1 text-gray-500">{item.subtitle} {item.subtitle && item.date && '|'} {item.date}</div>
+                  <p className="text-sm leading-relaxed text-gray-700 mt-2">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+
         {skillsList.length > 0 && (
           <div className="text-center max-w-2xl mx-auto border-t pt-8" style={{ borderColor: `${safeColor}20` }}>
             <p className="text-sm leading-loose tracking-widest uppercase font-medium">{skillsList.join(' • ')}</p>

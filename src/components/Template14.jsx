@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Template14({ resumeData }) {
-  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, themeColor } = resumeData;
+  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, customSections, themeColor } = resumeData;
   const skillsList = skills ? skills.split(',').map(s => s.trim()).filter(Boolean) : [];
   const safeColor = themeColor || '#0284c7'; // Professional Light Blue
 
@@ -93,6 +93,24 @@ export default function Template14({ resumeData }) {
             </div>
           </div>
         )}
+
+        {customSections?.length > 0 && customSections.map((section) => (
+          <div key={section.id} className="flex flex-col md:flex-row gap-8">
+            <h2 className="w-[30%] text-sm font-black uppercase tracking-widest text-gray-400 mt-1">{section.title}</h2>
+            <div className="w-[70%] space-y-8">
+              {section.items.map((item) => (
+                <div key={item.id}>
+                  <div className="flex flex-wrap justify-between items-baseline gap-2 mb-1">
+                    <h3 className="font-extrabold text-lg text-gray-900 break-words">{item.title}</h3>
+                    {item.date && <span className="text-xs font-bold px-2 py-1 bg-gray-100 rounded text-gray-600 whitespace-nowrap">{item.date}</span>}
+                  </div>
+                  {item.subtitle && <p className="text-sm font-bold mb-3 break-words" style={{ color: safeColor }}>{item.subtitle}</p>}
+                  <p className="text-sm text-gray-700 leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Template12({ resumeData }) {
-  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, themeColor } = resumeData;
+  const { name, email, phone, linkedin, portfolio, summary, skills, experience, education, projects, certifications, customSections, themeColor } = resumeData;
   const skillsList = skills ? skills.split(',').map(s => s.trim()).filter(Boolean) : [];
   const safeColor = themeColor || '#000000'; // Strict classic black/white with accent
 
@@ -88,6 +88,23 @@ export default function Template12({ resumeData }) {
         {skillsList.length > 0 && (
           <p className="text-sm text-gray-800 text-center leading-relaxed break-words pt-4"><strong className="uppercase tracking-widest text-xs">Skills:</strong> {skillsList.join(' • ')}</p>
         )}
+
+        {customSections?.length > 0 && customSections.map((section) => (
+          <section key={section.id}>
+            <h2 className="text-base font-bold uppercase tracking-widest border-b-[1px] border-black pb-1 mb-4 text-center" style={{ color: safeColor }}>{section.title}</h2>
+            <div className="space-y-4">
+              {section.items.map((item) => (
+                <div key={item.id}>
+                  <div className="flex flex-wrap justify-between items-baseline mb-1">
+                    <h3 className="font-bold text-base text-gray-900 break-words">{item.title} {item.subtitle && <span className="font-normal italic text-gray-700 ml-1">({item.subtitle})</span>}</h3>
+                    <span className="text-sm font-semibold text-gray-800 whitespace-nowrap">{item.date}</span>
+                  </div>
+                  <p className="text-sm text-gray-800 leading-relaxed">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </div>
   );
